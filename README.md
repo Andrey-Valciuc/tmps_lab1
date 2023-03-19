@@ -45,7 +45,7 @@ area = area_calculator.calculate_area(shape)
 ```
 
 ##4.Interface Segregation Principle (ISP):
-Acest principiu suna in felul urmator: Un client nu ar trebui să fie forțat niciodată să implementeze o interfață pe care nu o folosește sau clienții nu ar trebui să fie forțați să depindă de metodele pe care nu le folosesc. Prin urmare interfața IShape conține o singură metodă, calculate_area(), care este implementată de toate clasele de forme.
+ISP spune că interfețele ar trebui să fie specializate, astfel încât modulele să nu fie forțate să implementeze metode pe care nu le folosesc sau nu au nevoie de ele. În acest cod, interfața IShape conține doar o metodă, calculate_area(), care este necesară pentru a calcula aria formei. Această interfață este implementată de toate clasele de forme 
 
 ```
 class IShape(ABC):
@@ -55,9 +55,19 @@ class IShape(ABC):
 ```
 
 ##5.Dependency Inversion Principle (DIP):
-Proiectul respectă acest principiu depinzând de abstracții (interfața IShape) mai mult decât de implementări concrete (clasele de figuri).
+Proiectul respectă acest principiu depinzând de abstracții (interfața IShape) mai mult decât de implementări concrete (clasele de figuri).În această secvență de cod, clasa abstractă IShape reprezintă o abstracție și definește o metodă abstractă calculate_area(). Această clasă este folosită ca și tipul de date pentru parametrul shape din metoda calculate_area() a clasei AreaCalculator. Deoarece IShape este o abstracție, AreaCalculator depinde de aceasta în loc să depindă de implementările concrete ale figurilor. Prin urmare AreaCalculator este dependent de o abstracție și nu de implementări concrete
 
+```
+class IShape(ABC):
+    @abstractmethod
+    def calculate_area(self):
+        pass
 
+class AreaCalculator:
+    def calculate_area(self, shape: IShape):
+        return shape.calculate_area()
+
+```
 
 
 
